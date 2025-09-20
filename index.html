@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Početna – Adnan Graphix</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+/* --- Osnovni stilovi --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #0a192f;
+    color: #fff;
+    scroll-behavior: smooth;
+}
+
+/* --- Navigacija --- */
+.navbar {
+    background: rgba(10, 25, 47, 0.95);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    backdrop-filter: blur(12px);
+    transition: all 0.4s ease;
+}
+.navbar a {
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    padding: 10px 15px;
+}
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: #00d9ff;
+    transition: width 0.3s ease;
+}
+.navbar a:hover {
+    color: #00d9ff !important;
+    text-shadow: 0 0 10px rgba(0,217,255,0.6);
+}
+.navbar a:hover::after { width: 100%; }
+
+/* --- Hero sekcija --- */
+.hero {
+    min-height: 93vh;
+    background: linear-gradient(120deg, #0a192f, #112d4e, #0a192f, #112d4e);
+    background-size: 400% 400%;
+    animation: gradientShift 20s ease infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* --- Lebdeće kružnice --- */
+.floating-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(0,217,255,0.15);
+    filter: blur(25px);
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+}
+.floating-circle:nth-child(1) {width:150px; height:150px; top:10%; left:5%; animation-delay:0s;}
+.floating-circle:nth-child(2) {width:100px; height:100px; top:30%; right:10%; animation-delay:2s;}
+.floating-circle:nth-child(3) {width:200px; height:200px; bottom:15%; left:20%; animation-delay:4s;}
+
+@keyframes float {
+    0%, 100% {transform: translateY(0px);}
+    50% {transform: translateY(-25px);}
+}
+
+/* --- Tekst u hero sekciji sa fade-in efektom --- */
+.hero-text {
+    position: relative;
+    z-index: 2;
+}
+.fade-text {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards;
+}
+.delay1 { animation-delay: 0.5s; }
+.delay2 { animation-delay: 1.2s; }
+.delay3 { animation-delay: 2s; }
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+    to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* --- Naslovi i paragraf --- */
+.hero h1 {
+    font-weight: 700;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: #00d9ff;
+    text-shadow: 0 0 20px rgba(0,217,255,0.6);
+    margin-bottom: 15px;
+}
+.hero h1 span {
+    color: #00d9ff;
+    text-shadow: 0 0 30px rgba(0,217,255,0.8);
+}
+.hero p {
+    font-size: clamp(1.2rem, 2vw, 1.6rem);
+    color: #cfd8dc;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    line-height: 1.6;
+    text-shadow: 0 0 10px rgba(0,217,255,0.3);
+}
+
+/* --- Dugme (CTA) --- */
+.hero .btn-primary {
+    background: #00d9ff;
+    border: none;
+    color: #0a192f;
+    font-weight: 600;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+.hero .btn-primary:hover {
+    background: #00b5d9;
+    box-shadow: 0 0 20px rgba(0,217,255,0.6);
+}
+
+/* --- Sat --- */
+#clock {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: #fff;
+    text-shadow: 0 0 8px rgba(0,217,255,0.7);
+    margin-top: 20px;
+}
+
+/* --- Animacije --- */
+@keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* --- Footer --- */
+footer {
+    background: rgba(10,25,47,0.95);
+    color: #aaa;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.85rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+footer span {
+    color: #00d9ff;
+    font-weight: 500;
+}
+
+/* --- Responzivnost --- */
+@media (max-width: 768px) {
+    .hero h1 {font-size: clamp(2rem, 7vw, 3rem);}
+    .hero p {font-size: clamp(1rem, 2.5vw, 1.2rem);}
+}
+</style>
+</head>
+<body>
+
+<!-- Navigacija -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+<div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">Adnan Graphix</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Početna</a></li>
+        <li class="nav-item"><a class="nav-link" href="o-meni.html">O meni</a></li>
+        <li class="nav-item"><a class="nav-link" href="projekti.html">Promotivni materijal</a></li>
+        <li class="nav-item"><a class="nav-link" href="majice.html">Majice</a></li>
+        <li class="nav-item"><a class="nav-link" href="posteri.html">Posteri</a></li>
+        <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li>
+        <li class="nav-item"><a class="nav-link" href="kontakt.html">Kontakt</a></li>
+    </ul>
+    </div>  
+</div>
+</nav>
+
+<!-- Hero sekcija -->
+<header class="hero">
+    <!-- Lebdeće kružnice -->
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+    <div class="floating-circle"></div>
+
+    <div class="hero-text text-center">
+        <h1 class="fade-text delay1">Zdravo, ja sam <span>Adnan</span></h1>
+        <h1 class="fade-text delay2">i bavim se <span>Grafičkim dizajnom</span></h1>
+        <p class="fade-text delay3">Vaš brend zaslužuje dizajn koji inspiriše. Verujem da dobar dizajn ne treba samo izgledati lijepo — on mora komunicirati poruku i ostaviti utisak.</p>
+        
+        <!-- CTA dugme -->
+        <a href="kontakt.html" class="btn btn-primary fade-text delay3">Kontaktiraj me</a>
+        
+        <div id="clock"></div>
+    </div>
+</header>
+
+<!-- Footer -->
+<footer>
+    &copy; 2025 <span>Adnan Graphix</span>. Sva prava zadržana.
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
