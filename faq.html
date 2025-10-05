@@ -167,6 +167,15 @@ footer span { color:#00d9ff; font-weight:500; }
     .hero h2 { font-size: clamp(2rem, 6vw, 2.3rem); }
     .glass-box p { font-size: clamp(1rem, 2.5vw, 1.1rem); }
 }
+
+/* Hamburger meni lijevo na mobilnim uređajima */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+  .navbar-nav { margin-left: 0 !important; }
+}
 </style>
 </head>
 <body>
@@ -245,6 +254,7 @@ footer span { color:#00d9ff; font-weight:500; }
           <h5>Slanje zahtjeva? <i class="bi bi-chevron-down"></i></h5>
           <p class="faq-answer">Zahteve šaljete putem e-maila, kontakt forme ili direktno preko platformi.</p>
         </div>
+      </div>
     </div>
   </div>
 </section>
@@ -252,6 +262,11 @@ footer span { color:#00d9ff; font-weight:500; }
 <!-- Footer -->
 <footer>
     &copy; 2025 <span>Adnan Graphix</span>. Sva prava zadržana.
+</footer>
+
+<!-- Bootstrap JS za hamburger meni -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
 // Navbar scroll efekt
 window.addEventListener('scroll', function() {
@@ -294,4 +309,3 @@ faqCards.forEach(card => {
 
 </body>
 </html>
-
