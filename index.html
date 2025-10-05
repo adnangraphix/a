@@ -8,7 +8,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <style>
-/* --- Osnovni stilovi --- */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -18,7 +17,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* --- Navigacija --- */
+/* Navbar */
 .navbar {
     background: transparent;
     box-shadow: none;
@@ -51,7 +50,22 @@ body {
     width: 100%;
 }
 
-/* --- Hero sekcija --- */
+/* Posjeta broj u navbar-u */
+#visitor-count-navbar {
+    color: #00d9ff;
+    font-weight: 700;
+    margin-left: 25px;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    text-shadow: 0 0 5px #00d9ff, 0 0 10px rgba(0,217,255,0.5);
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+#visitor-count-navbar:hover {
+    transform: scale(1.1);
+    text-shadow: 0 0 15px #00d9ff, 0 0 25px rgba(0,217,255,0.7);
+}
+
+/* Hero sekcija */
 .hero {
     min-height: 93vh;
     background: linear-gradient(120deg, #0a192f, #112d4e, #0a192f, #112d4e);
@@ -67,7 +81,7 @@ body {
     padding: 0 20px;
 }
 
-/* --- Lebdeće kružnice --- */
+/* Lebdeće kružnice */
 .floating-circle {
     position: absolute;
     border-radius: 50%;
@@ -79,13 +93,9 @@ body {
 .floating-circle:nth-child(1) {width:150px; height:150px; top:10%; left:5%; animation-delay:0s;}
 .floating-circle:nth-child(2) {width:100px; height:100px; top:30%; right:10%; animation-delay:2s;}
 .floating-circle:nth-child(3) {width:200px; height:200px; bottom:15%; left:20%; animation-delay:4s;}
+@keyframes float { 0%,100%{transform: translateY(0);} 50%{transform: translateY(-25px);} }
 
-@keyframes float {
-    0%, 100% {transform: translateY(0px);}
-    50% {transform: translateY(-25px);}
-}
-
-/* --- Tekst u hero sekciji sa fade-in efektom --- */
+/* Hero tekst */
 .hero-text {
     position: relative;
     z-index: 2;
@@ -98,13 +108,8 @@ body {
 .delay1 { animation-delay: 0.5s; }
 .delay2 { animation-delay: 1.2s; }
 .delay3 { animation-delay: 2s; }
+@keyframes fadeInUp { from {opacity:0; transform:translateY(20px); filter:blur(4px);} to {opacity:1; transform:translateY(0); filter:blur(0);} }
 
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
-    to   { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-
-/* --- Naslovi i paragraf --- */
 .hero h1 {
     font-weight: 700;
     font-size: clamp(3rem, 6vw, 5rem);
@@ -125,7 +130,7 @@ body {
     text-shadow: 0 0 10px rgba(0,217,255,0.3);
 }
 
-/* --- Dugme (CTA) --- */
+/* Dugme */
 .hero .btn-primary {
     background: #00d9ff;
     border: none;
@@ -135,30 +140,14 @@ body {
     font-size: 1.1rem;
     border-radius: 50px;
     transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,217,255,0.4);
 }
 .hero .btn-primary:hover {
     background: #00b5d9;
-    box-shadow: 0 0 20px rgba(0,217,255,0.6);
+    box-shadow: 0 8px 25px rgba(0,217,255,0.6);
 }
 
-/* --- Sat --- */
-#clock {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    font-size: 1.3rem;
-    color: #fff;
-    text-shadow: 0 0 8px rgba(0,217,255,0.7);
-    margin-top: 20px;
-}
-
-/* --- Animacije --- */
-@keyframes gradientShift {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-}
-
-/* --- Footer --- */
+/* Footer */
 footer {
     background: rgba(10,25,47,0.95);
     color: #aaa;
@@ -167,15 +156,34 @@ footer {
     font-size: 0.85rem;
     border-top: 1px solid rgba(255,255,255,0.1);
 }
-footer span {
-    color: #00d9ff;
-    font-weight: 500;
-}
+footer span {color: #00d9ff; font-weight:500;}
 
-/* --- Responzivnost --- */
+/* Animacije */
+@keyframes gradientShift {0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+
+/* Responzivnost */
 @media (max-width: 768px) {
     .hero h1 {font-size: clamp(2rem, 7vw, 3rem);}
     .hero p {font-size: clamp(1rem, 2.5vw, 1.2rem);}
+    #visitor-count-navbar { margin-left: 15px; font-size:0.85rem; }
+}
+
+/* Hamburger meni lijevo i linkovi lijevo na mobilnom i tabletu */
+@media (max-width: 992px) {
+  .navbar-collapse {
+    justify-content: flex-start !important;
+  }
+  .navbar-nav {
+    margin-left: 0 !important; /* uklanja ms-auto */
+    text-align: left !important; /* linkovi lijevo */
+  }
+  .navbar-nav .nav-item {
+    width: 100%; /* da zauzmu cijelu širinu */
+  }
+  .navbar-nav .nav-link {
+    text-align: left !important; /* tekst lijevo */
+    padding-left: 1rem;
+  }
 }
 </style>
 </head>
@@ -189,15 +197,18 @@ footer span {
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Početna</a></li> 
+    <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Početna</a></li> 
         <li class="nav-item"><a class="nav-link" href="o-meni.html">O meni</a></li> 
         <li class="nav-item"><a class="nav-link" href="projekti.html">Promotivni materijal</a></li> 
         <li class="nav-item"><a class="nav-link" href="majice.html">Majice</a></li> 
         <li class="nav-item"><a class="nav-link" href="posteri.html">Posteri</a></li> 
-        <li class="nav-item"><a class="nav-link" href="Paketi-usluga.html">Paketi usluga</a></li> 
+        <li class="nav-item"><a class="nav-link" href="paketi-usluga.html">Paketi usluga</a></li> 
         <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li> 
-        <li class="nav-item"><a class="nav-link" href="kontakt.html">Kontakt</a></li> 
+        <li class="nav-item"><a class="nav-link" href="kontakt.html">Kontakt</a></li>
+        <li class="nav-item">
+            <span id="visitor-count-navbar">Posjeta: 0</span>
+        </li>
     </ul>
     </div>  
 </div>
@@ -205,7 +216,6 @@ footer span {
 
 <!-- Hero sekcija -->
 <header class="hero">
-    <!-- Lebdeće kružnice -->
     <div class="floating-circle"></div>
     <div class="floating-circle"></div>
     <div class="floating-circle"></div>
@@ -214,23 +224,17 @@ footer span {
         <h1 class="fade-text delay1">Zdravo, ja sam <span>Adnan</span></h1>
         <h1 class="fade-text delay2">i bavim se <span>Grafičkim dizajnom</span></h1>
         <p class="fade-text delay3">Vaš brend zaslužuje dizajn koji inspiriše. Verujem da dobar dizajn ne treba samo izgledati lijepo — on mora komunicirati poruku i ostaviti utisak.</p>
-        
-        <!-- CTA dugme -->
         <a href="kontakt.html" class="btn btn-primary fade-text delay3">Kontaktiraj me</a>
-        
-        <div id="clock"></div>
     </div>
 </header>
 
-<!-- Footer -->
 <footer>
     &copy; 2025 <span>Adnan Graphix</span>. Sva prava zadržana.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<!-- Navbar scroll i aktivni link -->
 <script>
+// Navbar scroll
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if(window.scrollY > 50){
@@ -249,8 +253,27 @@ navLinks.forEach(link => {
         link.classList.add('active');
     }
 });
-</script>
 
+// CountAPI posjete + animacija
+const visitorCounter = document.getElementById('visitor-count-navbar');
+fetch('https://api.countapi.xyz/hit/adnangraphix/homepage')
+.then(res => res.json())
+.then(data => {
+    animateCount(visitorCounter, data.value);
+});
+
+function animateCount(element, target) {
+    let count = 0;
+    const increment = Math.ceil(target / 50);
+    const interval = setInterval(() => {
+        count += increment;
+        if(count >= target){
+            count = target;
+            clearInterval(interval);
+        }
+        element.innerText = `Posjeta: ${count}`;
+    }, 30);
+}
+</script>
 </body>
 </html>
-
