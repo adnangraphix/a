@@ -50,21 +50,6 @@ body {
     width: 100%;
 }
 
-/* Posjeta broj u navbar-u */
-#visitor-count-navbar {
-    color: #00d9ff;
-    font-weight: 700;
-    margin-left: 25px;
-    font-size: 0.95rem;
-    white-space: nowrap;
-    text-shadow: 0 0 5px #00d9ff, 0 0 10px rgba(0,217,255,0.5);
-    transition: transform 0.3s ease, text-shadow 0.3s ease;
-}
-#visitor-count-navbar:hover {
-    transform: scale(1.1);
-    text-shadow: 0 0 15px #00d9ff, 0 0 25px rgba(0,217,255,0.7);
-}
-
 /* Hero sekcija */
 .hero {
     min-height: 93vh;
@@ -165,7 +150,6 @@ footer span {color: #00d9ff; font-weight:500;}
 @media (max-width: 768px) {
     .hero h1 {font-size: clamp(2rem, 7vw, 3rem);}
     .hero p {font-size: clamp(1rem, 2.5vw, 1.2rem);}
-    #visitor-count-navbar { margin-left: 15px; font-size:0.85rem; }
 }
 
 /* Hamburger meni lijevo i linkovi lijevo na mobilnom i tabletu */
@@ -206,9 +190,6 @@ footer span {color: #00d9ff; font-weight:500;}
         <li class="nav-item"><a class="nav-link" href="Paketi-usluga.html">Paketi usluga</a></li> 
         <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li> 
         <li class="nav-item"><a class="nav-link" href="kontakt.html">Kontakt</a></li>
-        <li class="nav-item">
-            <span id="visitor-count-navbar">Posjeta: 0</span>
-        </li>
     </ul>
     </div>  
 </div>
@@ -253,30 +234,6 @@ navLinks.forEach(link => {
         link.classList.add('active');
     }
 });
-
-// EasyCounter posjete + animacija
-const visitorCounter = document.getElementById('visitor-count-navbar');
-fetch('https://api.easycounter.com/hit/adnangraphix-homepage')
-.then(res => res.json())
-.then(data => {
-    animateCount(visitorCounter, data.count);
-})
-.catch(err => {
-    visitorCounter.innerText = "Posjeta: 0";
-});
-
-function animateCount(element, target) {
-    let count = 0;
-    const increment = Math.ceil(target / 50);
-    const interval = setInterval(() => {
-        count += increment;
-        if(count >= target){
-            count = target;
-            clearInterval(interval);
-        }
-        element.innerText = `Posjeta: ${count}`;
-    }, 30);
-}
 </script>
 </body>
 </html>
