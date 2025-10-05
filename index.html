@@ -174,14 +174,14 @@ footer span {color: #00d9ff; font-weight:500;}
     justify-content: flex-start !important;
   }
   .navbar-nav {
-    margin-left: 0 !important; /* uklanja ms-auto */
-    text-align: left !important; /* linkovi lijevo */
+    margin-left: 0 !important;
+    text-align: left !important;
   }
   .navbar-nav .nav-item {
-    width: 100%; /* da zauzmu cijelu širinu */
+    width: 100%;
   }
   .navbar-nav .nav-link {
-    text-align: left !important; /* tekst lijevo */
+    text-align: left !important;
     padding-left: 1rem;
   }
 }
@@ -254,12 +254,15 @@ navLinks.forEach(link => {
     }
 });
 
-// CountAPI posjete + animacija
+// EasyCounter posjete + animacija
 const visitorCounter = document.getElementById('visitor-count-navbar');
-fetch('https://api.countapi.xyz/hit/adnangraphix/homepage')
+fetch('https://api.easycounter.com/hit/adnangraphix-homepage')
 .then(res => res.json())
 .then(data => {
-    animateCount(visitorCounter, data.value);
+    animateCount(visitorCounter, data.count);
+})
+.catch(err => {
+    visitorCounter.innerText = "Posjeta: 0";
 });
 
 function animateCount(element, target) {
@@ -277,4 +280,3 @@ function animateCount(element, target) {
 </script>
 </body>
 </html>
-
