@@ -37,7 +37,6 @@ body { font-family: 'Poppins', sans-serif; margin:0; padding:0; background:#0a19
 .rating {margin-top: 10px; display:flex; justify-content:center; gap:5px;}
 .rating .star {font-size: 2rem; color: #ffffff; cursor: pointer; transition: color 0.2s;}
 .rating .star.hover, .rating .star.selected {color: #ffd700;}
-.avg-rating {margin-top:5px; font-size:1rem; color:#ffee00; text-align:center;}
 
 footer { background: rgba(10,25,47,0.95); color:#aaa; text-align:center; padding:20px 0; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.1);}
 footer span {color:#00d9ff; font-weight:500;}
@@ -50,18 +49,7 @@ footer span {color:#00d9ff; font-weight:500;}
 
 @media(max-width:768px){ 
     .glass-box h1 { font-size: clamp(2rem,6vw,2.5rem); } 
-    .card img { height: auto; object-fit: contain; } /* cijela slika na mobilnim/tabletima */
-}
-
-/* Hamburger lijevo za mobilne/tablet uređaje */
-@media (max-width: 992px) {
-  .navbar-collapse {
-    justify-content: flex-start !important;
-    text-align: left !important;
-  }
-  .navbar-nav {
-    margin-left: 0 !important;
-  }
+    .card img { height: auto; object-fit: contain; } 
 }
 
 .btn-custom { background: #00d9ff; color: #0a192f; border: none; font-weight:600; transition: 0.3s; border-radius:8px;}
@@ -111,7 +99,6 @@ footer span {color:#00d9ff; font-weight:500;}
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// Navbar scroll efekat
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
     if(window.scrollY > 50){
@@ -124,22 +111,19 @@ window.addEventListener('scroll', function() {
 });
 
 const posteri = [
-    {img:'audi rs7.jpg', naziv:'Audi RS7'},
-    {img:'bmww.jpg', naziv:'Bmw'},
-    {img:'bmw.png', naziv:'Bmw'},
-    {img:'GOLF 6 GTI.png', naziv:'Golf 6 GTI'},
-    {img:'golf 7.png', naziv:'Golf 7'},
-    {img:'mercedes.jpg', naziv:'Mercedes'},
-    {img:'porsche.jpg', naziv:'Porsche'},
-    {img:'porše.jpg', naziv:'Porsche'},
-    {img:'RS 7.png', naziv:'RS 7'}
+    {img:'image/audi rs7.jpg', naziv:'Audi RS7'},
+    {img:'image/bmww.jpg', naziv:'Bmw'},
+    {img:'image/bmw.png', naziv:'Bmw'},
+    {img:'image/GOLF 6 GTI.png', naziv:'Golf 6 GTI'},
+    {img:'image/golf 7.png', naziv:'Golf 7'},
+    {img:'image/mercedes.jpg', naziv:'Mercedes'},
+    {img:'image/porsche.jpg', naziv:'Porsche'},
+    {img:'image/porše.jpg', naziv:'Porsche'},
+    {img:'image/RS 7.png', naziv:'RS 7'}
 ];
 
 const row = document.getElementById('posteri-row');
 posteri.forEach(p => {
-    let savedRatings = JSON.parse(localStorage.getItem(p.naziv)) || [];
-    let avgRating = savedRatings.length ? (savedRatings.reduce((a,b)=>a+b,0)/savedRatings.length).toFixed(1) : "0.0";
-
     const col = document.createElement('div');
     col.classList.add('col-md-4');
     col.innerHTML = `
@@ -148,7 +132,6 @@ posteri.forEach(p => {
             <div class="card-body">
                 <h5 class="card-title">${p.naziv}</h5>
                 <p class="card-text">Poster koji privlači pažnju</p>
-                <div class="avg-rating" id="avg-${p.naziv}">${avgRating}★</div>
                 <form action="https://api.web3forms.com/submit" method="POST" class="rating-form">
                     <input type="hidden" name="access_key" value="fb7420ea-f72e-42e2-bcf8-b114b7da9a02">
                     <input type="hidden" name="projekat" value="${p.naziv}">
@@ -169,7 +152,6 @@ posteri.forEach(p => {
     row.appendChild(col);
 });
 
-// Fade-in kartice
 const cards = document.querySelectorAll('.card');
 const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -180,12 +162,10 @@ const observer = new IntersectionObserver(entries => {
 },{threshold:0.2});
 cards.forEach(card => observer.observe(card));
 
-// Zvjezdice, Web3Forms i prosjek
 document.querySelectorAll('.rating-form').forEach(form => {
     const stars = form.querySelectorAll('.star');
     const ocjenaInput = form.querySelector('.ocjena');
     const successMsg = form.querySelector('p');
-    const avgDisplay = form.previousElementSibling;
 
     stars.forEach(star => {
         star.addEventListener('mouseover', () => {
@@ -208,14 +188,6 @@ document.querySelectorAll('.rating-form').forEach(form => {
             successMsg.style.display='block';
             form.reset();
             stars.forEach(s => s.classList.remove('selected'));
-
-            const projekt = form.querySelector('[name="projekat"]').value;
-            let savedRatings = JSON.parse(localStorage.getItem(projekt)) || [];
-            savedRatings.push(parseInt(ocjenaInput.value));
-            localStorage.setItem(projekt, JSON.stringify(savedRatings));
-
-            let avg = (savedRatings.reduce((a,b)=>a+b,0)/savedRatings.length).toFixed(1);
-            avgDisplay.innerText = avg + "★";
         } else {
             successMsg.style.display='block';
             successMsg.innerText = 'Greška! Pokušajte ponovo.';
@@ -223,7 +195,6 @@ document.querySelectorAll('.rating-form').forEach(form => {
     });
 });
 
-// Lightbox
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.lightbox .close');
@@ -240,4 +211,3 @@ lightbox.addEventListener('click', e=>{if(e.target===lightbox){lightbox.style.di
 
 </body>
 </html>
-
