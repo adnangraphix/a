@@ -33,21 +33,33 @@ body { font-family: 'Poppins', sans-serif; margin:0; padding:0; background:#0a19
 .card-body {padding: 20px; flex: 1;}
 .card-title {color: #00d9ff; font-weight: 600;}
 .card-text {color: #d1d9e0; font-size: 1rem;}
-
 .rating {margin-top: 10px;}
 .rating .star {font-size: 2rem; color: #ffffff; cursor: pointer; transition: color 0.2s;}
 .rating .star.hover, .rating .star.selected {color: #ffd700;}
+.avg-rating {margin-top: 5px; font-size: 1rem; color: #ffee00;}
 
 footer { background: rgba(10,25,47,0.95); color:#aaa; text-align:center; padding:20px 0; font-size:0.85rem; border-top:1px solid rgba(255,255,255,0.1);}
 footer span {color:#00d9ff; font-weight:500;}
 
-.lightbox { display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; backdrop-filter: blur(8px);}
-.lightbox img { max-width:90%; max-height:90%; border-radius:12px; box-shadow:0 0 25px rgba(0,217,255,0.4); animation: zoomIn 0.4s ease;}
+.lightbox { display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; backdrop-filter: blur(8px); flex-direction:column;}
+.lightbox img { max-width:90%; max-height:80%; border-radius:12px; box-shadow:0 0 25px rgba(0,217,255,0.4); animation: zoomIn 0.4s ease;}
 .lightbox .close { position:absolute; top:20px; right:35px; color:#fff; font-size:2rem; font-weight:bold; cursor:pointer; transition: color 0.3s;}
 .lightbox .close:hover { color:#00d9ff;}
 @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-@media(max-width:768px){ .glass-box h1 { font-size: clamp(2rem,6vw,2.5rem); } .card img { height: 250px; } }
+/* MEDIA QUERIES ZA MOBILNE UREĐAJE I TABLETE */
+@media (max-width: 992px) { /* tablet i manji */
+  .card img { height: 350px; }
+}
+
+@media (max-width: 768px) { /* tablet manji / velike telefone */
+  .glass-box h1 { font-size: clamp(2rem,6vw,2.5rem); }
+  .card img { height: 400px; }
+}
+
+@media (max-width: 480px) { /* telefoni */
+  .card img { height: 450px; }
+}
 
 .btn-custom { background: #00d9ff; color: #0a192f; border: none; font-weight:600; transition: 0.3s; border-radius:8px;}
 .btn-custom:hover { background:#00b8e6; color:#fff;}
@@ -66,7 +78,7 @@ footer span {color:#00d9ff; font-weight:500;}
             <li class="nav-item"><a class="nav-link active" href="projekti.html">Promotivni materijal</a></li> 
             <li class="nav-item"><a class="nav-link" href="majice.html">Majice</a></li> 
             <li class="nav-item"><a class="nav-link" href="posteri.html">Posteri</a></li> 
-            <li class="nav-item"><a class="nav-link" href="Paketi-usluga.html">Paketi usluga</a></li> 
+            <li class="nav-item"><a class="nav-link" href="paketi-usluga.html">Paketi usluga</a></li> 
             <li class="nav-item"><a class="nav-link" href="faq.html">FAQ</a></li> 
             <li class="nav-item"><a class="nav-link" href="kontakt.html">Kontakt</a></li> 
         </ul>
@@ -86,43 +98,47 @@ footer span {color:#00d9ff; font-weight:500;}
 
 <script>
 const projekti = [
-    {img:'HOTDOG.png', naziv:'Hot Dog'},
-    {img:'GRAND OPENING.png', naziv:'Grand Opening'},
-    {img:'palacinke.jpg', naziv:'Pancake'},
-    {img:'STEAK.png', naziv:'Steak'},
-    {img:'SUSHI.jpg', naziv:'Sushi'},
-    {img:'TORTA.jpg', naziv:'Dessert'},
-    {img:'PIZZA.jpg', naziv:'Pizza'},
-    {img:'pasta.png', naziv:'Pasta'},
-    {img:'PALCINKE.jpg', naziv:'Pancake'}
+    {img:'image/HOTDOG.png', naziv:'Hot Dog'},
+    {img:'image/GRAND OPENING.png', naziv:'Grand Opening'},
+    {img:'image/palacinke.jpg', naziv:'Pancake'},
+    {img:'image/STEAK.png', naziv:'Steak'},
+    {img:'image/SUSHI.jpg', naziv:'Sushi'},
+    {img:'image/TORTA.jpg', naziv:'Dessert'},
+    {img:'image/PIZZA.jpg', naziv:'Pizza'},
+    {img:'image/pasta.png', naziv:'Pasta'},
+    {img:'image/PALCINKE.jpg', naziv:'Pancake'}
 ];
 
 projekti.forEach(p=>{
-document.write(`
-<div class="col-md-4">
-<div class="card">
-<img src="${p.img}" alt="${p.naziv}">
-<div class="card-body">
-<h5 class="card-title">${p.naziv}</h5>
-<p class="card-text">Profesionalni vizuali za promociju.</p>
-<form action="https://api.web3forms.com/submit" method="POST" class="rating-form">
-<input type="hidden" name="access_key" value="fb7420ea-f72e-42e2-bcf8-b114b7da9a02">
-<input type="hidden" name="projekat" value="${p.naziv}">
-<input type="hidden" name="ocjena" class="ocjena" value="">
-<div class="rating">
-<span class="star" data-value="1">&#9733;</span>
-<span class="star" data-value="2">&#9733;</span>
-<span class="star" data-value="3">&#9733;</span>
-<span class="star" data-value="4">&#9733;</span>
-<span class="star" data-value="5">&#9733;</span>
-</div>
-<button type="submit" class="btn btn-custom mt-2 w-100">Ocijeni</button>
-<p class="text-success mt-2" style="display:none;">Hvala! Vaša ocjena je poslata.</p>
-</form>
-</div>
-</div>
-</div>
-`);
+    let savedRatings = JSON.parse(localStorage.getItem(p.naziv)) || [];
+    let avgRating = savedRatings.length ? (savedRatings.reduce((a,b)=>a+b,0)/savedRatings.length).toFixed(1) : "0.0";
+
+    document.write(`
+    <div class="col-12 col-sm-6 col-md-4">
+    <div class="card">
+    <img src="${p.img}" alt="${p.naziv}">
+    <div class="card-body">
+    <h5 class="card-title">${p.naziv}</h5>
+    <p class="card-text">Profesionalni vizuali za promociju.</p>
+    <div class="avg-rating" id="avg-${p.naziv}">${avgRating}★</div>
+    <form action="https://api.web3forms.com/submit" method="POST" class="rating-form">
+    <input type="hidden" name="access_key" value="fb7420ea-f72e-42e2-bcf8-b114b7da9a02">
+    <input type="hidden" name="projekat" value="${p.naziv}">
+    <input type="hidden" name="ocjena" class="ocjena" value="">
+    <div class="rating">
+    <span class="star" data-value="1">&#9733;</span>
+    <span class="star" data-value="2">&#9733;</span>
+    <span class="star" data-value="3">&#9733;</span>
+    <span class="star" data-value="4">&#9733;</span>
+    <span class="star" data-value="5">&#9733;</span>
+    </div>
+    <button type="submit" class="btn btn-custom mt-2 w-100">Ocijeni</button>
+    <p class="text-success mt-2" style="display:none;">Hvala! Vaša ocjena je poslata.</p>
+    </form>
+    </div>
+    </div>
+    </div>
+    `);
 });
 </script>
 
@@ -165,11 +181,12 @@ const observer = new IntersectionObserver(entries => {
 },{threshold:0.2});
 cards.forEach(card => observer.observe(card));
 
-// Zvjezdice i Web3Forms
+// Zvjezdice, Web3Forms i prosjek
 document.querySelectorAll('.rating-form').forEach(form => {
     const stars = form.querySelectorAll('.star');
     const ocjenaInput = form.querySelector('.ocjena');
     const successMsg = form.querySelector('p');
+    const avgDisplay = form.previousElementSibling;
 
     stars.forEach(star => {
         star.addEventListener('mouseover', () => {
@@ -192,6 +209,14 @@ document.querySelectorAll('.rating-form').forEach(form => {
             successMsg.style.display='block';
             form.reset();
             stars.forEach(s => s.classList.remove('selected'));
+
+            const projekt = form.querySelector('[name="projekat"]').value;
+            let savedRatings = JSON.parse(localStorage.getItem(projekt)) || [];
+            savedRatings.push(parseInt(ocjenaInput.value));
+            localStorage.setItem(projekt, JSON.stringify(savedRatings));
+
+            let avg = (savedRatings.reduce((a,b)=>a+b,0)/savedRatings.length).toFixed(1);
+            avgDisplay.innerText = avg + "★";
         } else {
             successMsg.style.display='block';
             successMsg.innerText = 'Greška! Pokušajte ponovo.';
@@ -215,5 +240,3 @@ lightbox.addEventListener('click', e=>{if(e.target===lightbox){lightbox.style.di
 </script>
 </body>
 </html>
-
-
